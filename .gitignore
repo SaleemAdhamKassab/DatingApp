@@ -1,1 +1,4 @@
-DatingApp.API/DatingApp.db-shm
+.vscode
+bin
+obj
+*.db

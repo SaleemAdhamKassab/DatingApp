@@ -10,7 +10,7 @@ import { ActivatedRoute } from '../../../../node_modules/@angular/router';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  users: User[]=[];
+  users!: User[];
 
   constructor(private userService: UserService, private alertify: AlertifyService,
     private route: ActivatedRoute) { }
