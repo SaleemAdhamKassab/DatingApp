@@ -13,6 +13,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 // import { NgxGalleryModule } from 'ngx-gallery';
 import { AlertifyService } from './_services/alertify.service';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
+
 
 
 
@@ -36,6 +40,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+
 
 
 
@@ -72,6 +77,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    PaginationModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BsDatepickerModule.forRoot(),
     NgPipesModule,
@@ -84,7 +90,8 @@ export function tokenGetter() {
         allowedDomains:['localhost:5000'],
         disallowedRoutes: ['localhost:5000/api/auth']
       }
-    })
+    }),
+    ButtonsModule.forRoot()
   //   JwtModule.forRoot({
   //     config:{
   //       tokenGetter:() => {
