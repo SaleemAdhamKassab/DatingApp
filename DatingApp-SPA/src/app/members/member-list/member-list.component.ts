@@ -12,7 +12,7 @@ import { Pagination, PaginatedResult } from '../../_models/pagination';
 })
 export class MemberListComponent implements OnInit {
   users!: User[];
-  user: User = JSON.parse(localStorage.getItem('user')||'{}');
+  user: User = JSON.parse(localStorage.getItem('user') as any);
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
   userParams: any = {};
   pagination!: Pagination;
