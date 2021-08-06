@@ -11,7 +11,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import {NgPipesModule} from 'ngx-pipes';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-// import { NgxGalleryModule } from 'ngx-gallery';
 import { AlertifyService } from './_services/alertify.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';

@@ -9,3 +9,16 @@ table {
 td {
   vertical-align: middle;
 }
+
+.bs-danger {
+  color: #fff;
+  background-color: #df382c;
+  border-color: #df382c;
+}
+
+.bs-danger:hover {
+  color: #fff;
+  background-color: #be3025;
+  border-color: #b22d23;
+}
+

@@ -14,7 +14,7 @@
   </div>
 
   <div class="row" *ngIf="messages.length == 0">
-    <h3>No messages</h3>
+    <h3 class="m-5 text-center">No messages</h3>
   </div>
 
   <div class="row" *ngIf="messages.length > 0">
@@ -41,7 +41,7 @@
         </td>
         <td>{{message.messageSent | timeAgo}}</td>
         <td>
-          <button class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Delete</button>
+          <button class="bs-danger" (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Delete</button>
         </td>
       </tr>
     </table>
