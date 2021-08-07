@@ -95,7 +95,7 @@ namespace DatingApp.API.Controllers
             {
                 var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
                 // return CreatedAtRoute("GetMessage", new {id = message.Id}, messageToReturn);
-                return CreatedAtAction(nameof(GetMessage), new { id = message.Id }, messageToReturn);
+                return CreatedAtRoute(nameof(GetMessage), new { userId, id = message.Id }, messageToReturn);
 
             }
 
