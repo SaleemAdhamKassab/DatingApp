@@ -31,7 +31,7 @@
         <td>{{message.content}}</td>
         <td>
           <div *ngIf="messageContainer != 'Outbox'">
-                <img src={{message?.senderPhotoUrl}} class="img-circle rounded-circle mr-1">
+                <img src={{message.senderPhotoUrl}} class="img-circle rounded-circle mr-1">
                 <strong>{{message.senderKnownAs}}</strong>
           </div>
           <div *ngIf="messageContainer == 'Outbox'">
@@ -39,7 +39,7 @@
                 <strong>{{message.recipientKnownAs}}</strong>
           </div>
         </td>
-        <td>{{message.messageSent | timeAgo}}</td>
+        <td>{{message.messageSent | timeago}}</td>
         <td>
           <button class="bs-danger" (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Delete</button>
         </td>

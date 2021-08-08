@@ -14,7 +14,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AlertifyService } from './_services/alertify.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-
+import { TimeagoModule } from 'ngx-timeago';
 
 
 
@@ -77,6 +77,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     NgxGalleryModule,
+    TimeagoModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),

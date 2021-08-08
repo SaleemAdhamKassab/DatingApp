@@ -24,7 +24,7 @@
           </div>
           <div>
             <strong>Last Active:</strong>
-            <p>{{user.lastActive | timeAgo}}</p>
+            <p>{{user.lastActive | timeago}}</p>
           </div>
           <div>
             <strong>Member Since:</strong>
@@ -52,11 +52,13 @@
                   <textarea class="form-control" name="interests" rows="6" 
                     [(ngModel)]="user.interests"></textarea>
                   <h4>Location Details:</h4>
-                <div class="form-inline">
-                  <label for="city">City</label>
-                  <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
-                  <label for="country">City</label>
-                  <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
+                <div class="row">
+                  <div class="col-md-5 d-flex flex-row bd-highlight mb-3">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control col-md-6 d-flex flex-row bd-highlight mb-3" name="country" [(ngModel)]="user.country">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control col-md-6 d-flex flex-row bd-highlight mb-3" name="city" [(ngModel)]="user.city">
+                </div>
                 </div>
                 
             </form>

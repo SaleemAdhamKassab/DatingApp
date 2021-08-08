@@ -13,3 +13,12 @@
     background-color: #fff;
     border-top: none;
 }
+label { 
+    margin-top: 9px;
+    margin-left: 5px;
+
+    text-align: right;
+    
+    float:left;
+    margin-right:5px;
+}
