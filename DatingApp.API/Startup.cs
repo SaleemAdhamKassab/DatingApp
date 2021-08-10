@@ -21,6 +21,8 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using DatingApp.API.Helpers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+
 
 namespace DatingApp.API
 {
@@ -34,6 +36,42 @@ namespace DatingApp.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
+        {
+
+            services.AddDbContext<DataContext>(x => x.UseMySql(Configuration.GetConnectionString("DefaultConnection")
+                                                ,new MySqlServerVersion(new Version(8, 0, 26)),
+                                                U=>U.EnableRetryOnFailure())
+                                                // .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
+                                                .ConfigureWarnings(warnings => warnings.Default(WarningBehavior.Ignore)));
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DatingApp.API", Version = "v1" });
+            });
+            services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<Seed>();  
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+                services.AddScoped<LogUserActivity>();
+        }
+
+
+        // //using SQLite just for development
+        public void ConfigureDevelopmentServices(IServiceCollection services)
         {
 
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
@@ -61,7 +99,7 @@ namespace DatingApp.API
                     };
                 });
                 services.AddScoped<LogUserActivity>();
-            }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
@@ -94,10 +132,21 @@ namespace DatingApp.API
             app.UseCors(x => x.WithOrigins("http://localhost:4200")
                 .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
             app.UseAuthentication();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>{
+                endpoints.MapControllerRoute(
+                name: "spa-fallback",
+                pattern: "{controller=Fallback}/{action=Index}");
+  
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
+
+        
 
             app.UseEndpoints(endpoints =>
             {
