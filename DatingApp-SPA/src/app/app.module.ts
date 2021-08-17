@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,11 +10,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
 import {NgPipesModule} from 'ngx-pipes';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { CustomHammerConfig, NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AlertifyService } from './_services/alertify.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+
 
 
 
@@ -42,6 +45,13 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { AdminService } from './_services/admin.service';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+
 
 
 
@@ -68,7 +78,13 @@ export function tokenGetter() {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    MemberMessagesComponent
+    MemberMessagesComponent,
+    PhotoManagementComponent,
+    UserManagementComponent,
+    HasRoleDirective,
+    AdminPanelComponent,
+    RolesModalComponent,
+   
     
       
   ],
@@ -86,7 +102,6 @@ export function tokenGetter() {
     BsDatepickerModule.forRoot(),
     NgPipesModule,
     FileUploadModule,
-    FormsModule,
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
@@ -95,17 +110,8 @@ export function tokenGetter() {
         disallowedRoutes: ['localhost:5000/api/auth']
       }
     }),
-    ButtonsModule.forRoot()
-  //   JwtModule.forRoot({
-  //     config:{
-  //       tokenGetter:() => {
-  //         return localStorage.getItem('token');
-  //       },
-  //       allowedDomains: ['localhost:5000'],
-  //       disallowedRoutes:['localhost:5000/api/auth']
-  //     }
-  //   })
-
+    ButtonsModule.forRoot(),
+    ModalModule.forRoot()
   ],
   
 
@@ -120,7 +126,12 @@ export function tokenGetter() {
       MemberEditResolver,
       PreventUnsavedChanges,
       ListsResolver,
-      MessagesResolver
+      MessagesResolver,
+      AdminService,
+      { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
+    ],
+    entryComponents: [
+      RolesModalComponent
     ],
   bootstrap: [AppComponent]
 })

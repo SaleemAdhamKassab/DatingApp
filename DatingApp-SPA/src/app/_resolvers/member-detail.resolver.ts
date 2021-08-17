@@ -7,11 +7,12 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class MemberDetailResolver implements Resolve<User|null> {
+export class MemberDetailResolver implements Resolve<User> {
     constructor(private userService: UserService, private router: Router,
         private alertify: AlertifyService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<User|null> {
+    // resolve(route: ActivatedRouteSnapshot): Observable<User> {
+        resolve(route: ActivatedRouteSnapshot): any {
         return this.userService.getUser(route.params['id']).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');

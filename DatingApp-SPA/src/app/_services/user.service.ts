@@ -52,7 +52,7 @@ export class UserService {
       );
   }
 
-  getUser(id: number): Observable<User> {
+  getUser(id:any): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 
@@ -72,7 +72,7 @@ export class UserService {
     return this.http.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {});
   }
 
-  getMessages(id: number, page?:any, itemsPerPage?:any, messageContainer?:any) {
+  getMessages(id: number, page?:any, itemsPerPage?: any, messageContainer?:any) {
     const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
 
     let params = new HttpParams();
@@ -87,7 +87,7 @@ export class UserService {
     return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages', {observe: 'response', params})
       .pipe(
         map(response => {
-          paginatedResult.result = response.body as any;
+          paginatedResult.result = response.body as any; 
           if (response.headers.get('Pagination') !== null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination') as any);
           }

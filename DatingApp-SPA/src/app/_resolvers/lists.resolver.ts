@@ -16,8 +16,7 @@ export class ListsResolver implements Resolve<User[]> {
         private alertify: AlertifyService) {}
 
     // resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-        resolve(route: ActivatedRouteSnapshot): any {
-
+        resolve(route: ActivatedRouteSnapshot):any {
         return this.userService.getUsers(this.pageNumber, this.pageSize, null, this.likesParam).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');

@@ -1,0 +1,9 @@
+.btn-info {
+    background-color: lightseagreen;
+  }
+  
+  .btn-info:hover {
+    color: #fff;
+    background-color: rgb(119, 189, 185);
+  }
+  

@@ -11,4 +11,4 @@ namespace DatingApp.API.Controllers
                 "wwwroot", "index.html"), "text/HTML");
         }
     }
-}   
+}
