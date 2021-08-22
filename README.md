@@ -53,10 +53,12 @@ Approve or delete user photo upload requests to reduce the load on the admin and
 
 1.	The main protagonists:
 
-    a.	Microsoft Entity Framework Core version:5.0.3
-
-    b.	Angular CLI version: 12.1.0
-
+      a.	Angular CLI version: 12.1.0
+   
+      b.	ASP.NET Core Web API version:5.0.301
+   
+      c.	Microsoft Entity Framework Core version:5.0.3
+   
 
 2.	Supporting Cast:
 
